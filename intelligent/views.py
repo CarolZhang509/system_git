@@ -22,3 +22,5 @@ def intelligent(request):
         'ph_data': json.dumps(ph_data),
     }
     return render(request, 'html/dash-IntelligentCenter.html', context)
+
+#不知道该改点什么
