@@ -1,0 +1,9 @@
+{% extends "admin/index.html" %}
+{% block content %}
+{{ block.super }}  <!-- 继承并显示原有内容 -->
+<div>
+    <a href="{% url 'changed_admin' %}">查看用户面板</a>
+</div>
+{% endblock %}
+
+

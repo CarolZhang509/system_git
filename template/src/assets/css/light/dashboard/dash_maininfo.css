@@ -1,0 +1,635 @@
+/*
+	===============================
+			@Import	Function
+	===============================
+*/
+/*
+	===============================
+			@Import	Mixins
+	===============================
+*/
+.layout-spacing {
+    padding-bottom: 25px;
+}
+
+.widget {
+    position: relative;
+    padding: 0;
+    border-radius: 6px;
+    border: 1px solid #e0e6ed;
+    box-shadow: 0 0 40px 0 rgba(94, 92, 154, 0.06);
+}
+
+.apexcharts-xaxis text, .apexcharts-yaxis text {
+    fill: #3b3f5c;
+}
+
+.apexcharts-legend-text {
+    color: #3b3f5c !important;
+}
+
+.apexcharts-tooltip.apexcharts-theme-dark {
+    background: #191e3a !important;
+    box-shadow: none;
+}
+
+.apexcharts-tooltip.apexcharts-theme-dark .apexcharts-tooltip-title {
+    background: #191e3a !important;
+    border-bottom: 1px solid #191e3a;
+}
+
+/*
+  水文气象
+	===============================
+			@Import	Function
+	===============================
+*/
+/*
+	===============================
+			@Import	Mixins
+	===============================
+*/
+.widget.widget-card-four {
+    padding: 25px 23px;
+    background: #fff;
+}
+
+.widget-card-four .w-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.widget-card-four .w-header .w-info {
+    align-self: center;
+}
+
+.widget-card-four .w-header .w-info h6 {
+    font-weight: 600;
+    margin-bottom: 0;
+    color: #0e1726;
+    font-size: 23px;
+    letter-spacing: 0;
+}
+
+.widget-card-four .w-header .task-action svg {
+    color: #888ea8;
+    width: 19px;
+    height: 19px;
+}
+
+.widget-card-four .w-header .task-action .dropdown-menu {
+    transform: translate3d(-141px, 0, 0px);
+}
+
+.widget-card-four .w-content {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 36px;
+}
+
+.widget-card-four .w-content .w-info p.value {
+    font-weight: 500;
+    margin-bottom: 0;
+    color: #e95f2b;
+    font-size: 30px;
+}
+
+.widget-card-four .w-content .w-info p.value span {
+    font-size: 15px;
+    color: #0e1726;
+    font-weight: 700;
+    letter-spacing: 0;
+}
+
+.widget-card-four .w-content .w-info p.value svg {
+    width: 16px;
+    height: 16px;
+    color: #009688;
+    margin-top: 7px;
+}
+
+.widget-card-four .w-progress-stats {
+    display: flex;
+    margin-top: 36px;
+}
+
+.widget-card-four .w-icon {
+    color: #5f0a87;
+    align-self: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.widget-card-four .progress {
+    height: 8px;
+    margin-bottom: 0;
+    height: 20px;
+    padding: 4px;
+    border-radius: 20px;
+    width: 100%;
+    align-self: flex-end;
+    margin-right: 22px;
+    background-color: #ebedf2;
+}
+
+.widget-card-four .progress-bar.bg-gradient-secondary {
+    position: relative;
+    background-color: #fc5296;
+    background-image: linear-gradient(315deg, #805dca 0%, #4361ee 74%);
+}
+
+.widget-card-four .progress-bar:before {
+    content: "";
+    height: 6px;
+    width: 6px;
+    background: #fff;
+    position: absolute;
+    right: 3px;
+    border-radius: 50%;
+    top: 3px;
+}
+
+.widget-card-four .w-icon p {
+    margin-bottom: 0;
+    color: #e95f2b;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+/*
+	===============================
+			@Import	Function
+	===============================
+*/
+/*
+   设备状态card的css
+	===============================
+			@Import	Mixins
+	===============================
+*/
+
+.widget.widget-device {
+    padding: 22px 18px;
+    background: #fff;
+    height: 22em;
+}
+
+.widget.widget-device .widget-heading {
+    display: block;
+    justify-content: flex-start;
+    margin-bottom: 15px;
+}
+
+.widget.widget-device .widget-heading h6 {
+    color: #0e1726;
+    font-size: 17px;
+    display: block;
+    font-weight: 600;
+}
+
+.widget.widget-device .widget-heading .task-action svg {
+    color: #888ea8;
+    width: 19px;
+    height: 19px;
+}
+
+.widget.widget-device .simple-tab .widget-device .list-group-item {
+    position: relative; /* 为伪元素设置定位上下文 */
+    color: white;
+    background-color: #002B65; /* 背景色与图片一致 */
+    border: none; /* 移除边框 */
+    padding-left: 20px; /* 留出空间放置圆形图标 */
+}
+
+.list-group-item .feature-icon {
+    margin-right: 10px; /* 圆形图标和文本之间的间距 */
+    font-size: 1rem; /* 图标大小 */
+    display: inline-block; /* 让图标和文字在同一行显示 */
+}
+
+.list-group-item span {
+    margin-right: 20px; /* 文本之间的间距，如果需要的话 */
+}
+
+.list-group-item .span-tab {
+    display: block; /* 让每个span元素显示在新的行上 */
+    margin-left: 30px; /* 创建空格效果 */
+}
+
+.list-group-item .text-green {
+    color: green;
+}
+
+.list-group-item .text-red {
+    color: red;
+}
+
+/*
+	===============================
+			@Import	Function
+	===============================
+*/
+/*
+   附加功能card的css
+	===============================
+			@Import	Mixins
+	===============================
+*/
+.widget.widget-six {
+    padding: 22px 18px;
+    background: #fff;
+    height: 22em;
+}
+
+.widget.widget-six .widget-heading {
+    display: block;
+    justify-content: flex-start;
+    margin-bottom: 30px;
+}
+
+.widget.widget-six .widget-heading h6 {
+    color: #0e1726;
+    font-size: 17px;
+    display: block;
+    font-weight: 600;
+}
+
+.widget .widget-six .additional-features {
+    background-color: #002B65; /* 背景色 */
+    padding: 1rem; /* 内边距 */
+}
+
+.widget .widget-six .additional-features .feature-item {
+    padding: 10px; /* 框内边距 */
+}
+
+.widget .widget-six .additional-features .feature-item .feature-content {
+    background-color: white; /* 框背景色 */
+    border-radius: .25rem; /* 圆角 */
+    padding: .75rem; /* 内边距 */
+    display: flex; /* 启用Flex布局 */
+    flex-direction: column; /* 堆叠子元素 */
+    align-items: center; /* 水平居中对齐子元素 */
+    justify-content: center; /* 垂直居中对齐子元素 */
+}
+
+.feature-content .feature-icon {
+    font-size: 1.1rem; /* 图标大小 */
+    margin-bottom: 10rem;
+}
+
+.feature-content .feature-text {
+    flex-grow: 1; /* 让文本占据多余空间 */
+    margin-left: .5rem; /* 文本和图标之间的间距 */
+    font-weight: 500; /* 字体粗细 */
+    margin-top: 1em;
+}
+
+.feature-content .form-check-input {
+    margin-top: 1.6em;
+    margin-bottom: 2.5em;
+    width: 2.5em;
+    margin-left: 2em;
+    cursor: pointer;
+    background-clip: content-box;
+    border: none;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 1em;
+}
+
+/*
+  视频相关css
+	===============================
+			@Import	Function
+	===============================
+*/
+/*
+	===============================
+			@Import	Mixins
+	===============================
+*/
+.widget.widget-video {
+    padding: 22px 18px;
+    background: #fff;
+    height: 420px;
+}
+
+.widget.widget-video .widget-heading {
+    display: block;
+    justify-content: flex-start;
+}
+
+.widget.widget-video .widget-heading h6 {
+    color: #0e1726;
+    font-size: 17px;
+    display: block;
+    font-weight: 600;
+}
+
+.widget.widget-video .video-container {
+    display: block;
+    margin-top: 1em;
+}
+
+.widget.widget-video .video-container .paginating-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 1em;
+}
+
+/*
+  海洋牧场定位css
+	===============================
+			@Import	Function
+	===============================
+*/
+/*
+	===============================
+			@Import	Mixins
+	===============================
+*/
+.widget.widget-map {
+    padding: 22px 18px;
+    background: #fff;
+    height: 420px;
+}
+
+.widget.widget-map .widget-heading {
+    display: block;
+    justify-content: flex-start;
+}
+
+.widget.widget-map .widget-heading h6 {
+    color: #0e1726;
+    font-size: 17px;
+    display: block;
+    font-weight: 600;
+}
+
+.widget-map .map-container {
+    display: block;
+    margin-top: 1em;
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 320px;
+}
+
+/*
+    ===============================
+            @Import	Function
+    ===============================
+*/
+/*
+	===============================
+			@Import	Mixins
+	===============================
+*/
+.widget.widget-chart-three {
+    background: #fff;
+    padding: 0;
+}
+
+.widget.widget-chart-three .widget-heading {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 20px;
+    margin-bottom: 0;
+    padding-bottom: 20px;
+}
+
+.widget.widget-chart-three .widget-heading h5 {
+    font-size: 17px;
+    display: block;
+    color: #0e1726;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+.widget.widget-chart-three .widget-heading .dropdown {
+    align-self: center;
+}
+
+.widget.widget-chart-three .widget-heading .dropdown a svg {
+    color: #888ea8;
+    width: 19px;
+    height: 19px;
+}
+
+.widget.widget-chart-three .widget-heading .dropdown .dropdown-menu {
+    min-width: 10rem;
+    border-radius: 6px;
+    transform: translate3d(-142px, 0, 0px);
+}
+
+.widget.widget-chart-three .apexcharts-legend-marker {
+    left: -5px !important;
+}
+
+.widget.widget-chart-three #historydata {
+    overflow: hidden;
+}
+
+/*
+	===============================
+			@Import	Function
+	===============================
+*/
+/*
+	===============================
+			@Import	Mixins
+	===============================
+*/
+/*
+      ====================
+          Visitors by Browser
+      ====================
+  */
+.widget-four {
+    position: relative;
+    background: #fff;
+    padding: 20px;
+    border-radius: 6px;
+    height: 100%;
+    border: 1px solid #e0e6ed;
+    box-shadow: 0 0 40px 0 rgba(94, 92, 154, 0.06);
+}
+
+.widget-four .widget-heading {
+    margin-bottom: 25px;
+}
+
+.widget-four .widget-heading h5 {
+    font-size: 17px;
+    display: block;
+    color: #0e1726;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+.widget-four .widget-content {
+    font-size: 17px;
+}
+
+.widget-four .widget-content .browser-list {
+    display: flex;
+    align-items: center;
+}
+
+.widget-four .widget-content .browser-list:not(:last-child) {
+    margin-bottom: 30px;
+}
+
+.widget-four .widget-content .w-icon {
+    display: inline-block;
+    padding: 10px 9px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-self: center;
+    height: 34px;
+    width: 34px;
+    margin-right: 12px;
+}
+
+.widget-four .widget-content .w-icon svg {
+    display: block;
+    width: 15px;
+    height: 15px;
+}
+
+.widget-four .widget-content .browser-list:nth-child(1) .w-icon {
+    background: #eceffe;
+}
+
+.widget-four .widget-content .browser-list:nth-child(2) .w-icon {
+    background: #fbeced;
+}
+
+.widget-four .widget-content .browser-list:nth-child(3) .w-icon {
+    background: #fcf5e9;
+}
+
+.widget-four .widget-content .browser-list:nth-child(4) .w-icon {
+    background: #eceffe;
+}
+
+.widget-four .widget-content .browser-list:nth-child(5) .w-icon {
+    background: #fbeced;
+}
+
+.widget-four .widget-content .browser-list:nth-child(6) .w-icon {
+    background: #fcf5e9;
+}
+
+.widget-four .widget-content .browser-list:nth-child(1) .w-icon svg {
+    color: #4361ee;
+}
+
+.widget-four .widget-content .browser-list:nth-child(2) .w-icon svg {
+    color: #e7515a;
+}
+
+.widget-four .widget-content .browser-list:nth-child(3) .w-icon svg {
+    color: #e2a03f;
+}
+
+.widget-four .widget-content .browser-list:nth-child(4) .w-icon svg {
+    color: #4361ee;
+}
+
+.widget-four .widget-content .browser-list:nth-child(5) .w-icon svg {
+    color: #e7515a;
+}
+
+.widget-four .widget-content .browser-list:nth-child(6) .w-icon svg {
+    color: #e2a03f;
+}
+
+.widget-four .widget-content .w-browser-details {
+    width: 100%;
+    align-self: center;
+}
+
+.widget-four .widget-content .w-browser-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1px;
+    align-items: center; /* 保证标签和百分比垂直居中 */
+    position: relative; /* 对百分比进行定位 */
+}
+
+.widget-four .widget-content .w-browser-info h6 {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 0;
+    color: #3b3f5c;
+}
+
+.widget-four .widget-content .w-browser-info .browser-count {
+    position: absolute; /* 绝对定位相对于它的父元素 */
+    right: 0; /* 对齐到父元素的右边缘 */
+    top: 50%; /* 垂直居中 */
+    transform: translateY(-50%); /* 保证精确的垂直居中 */
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 0;
+    color: #888ea8;
+}
+
+.widget-four .widget-content .w-browser-stats {
+    position: relative; /* 确保进度条容器是相对定位的 */
+    display: flex; /* 使用 flex 布局，使得进度条和数字可以在同一行 */
+    align-items: center; /* 居中对齐进度条和数字 */
+}
+
+.widget-four .widget-content .w-browser-stats .progress {
+    margin-bottom: 0;
+    height: 22px;
+    padding: 4px;
+    border-radius: 20px;
+    position: relative;
+    width: calc(100% - 60px); /* 减去一个足够显示数字的宽度 */
+}
+
+.widget-four .widget-content .w-browser-stats .progress .progress-bar {
+    position: relative;
+}
+
+.widget-four .widget-content .w-browser-stats .progress .progress-bar.bg-gradient-primary {
+    background-image: linear-gradient(315deg, #2a2a72 0%, #009ffd 74%);
+}
+
+.widget-four .widget-content .w-browser-stats .progress .progress-bar.bg-gradient-danger {
+    background-image: linear-gradient(315deg, #3f0d12 0%, #a71d31 74%);
+}
+
+.widget-four .widget-content .w-browser-stats .progress .progress-bar.bg-gradient-warning {
+    background-image: linear-gradient(315deg, #fc9842 0%, #fe5f75 74%);
+}
+
+.widget-four .widget-content .w-browser-stats .progress .progress-bar:before {
+    content: "";
+    height: 7px;
+    width: 7px;
+    background: #fff;
+    position: absolute;
+    right: 3px;
+    border-radius: 50%;
+    top: 3.49px;
+}
+
+.widget-four .widget-content .w-browser-stats .progress-value {
+    display: inline-block; /* 使用 inline-block 使得可以应用 margin */
+    font-size: 16px; /* 根据你的设计调整大小 */
+    font-weight: bold;
+    color: #4361ee;
+    position: absolute; /* 绝对定位对于数字 */
+    right: 0; /* 与进度条右侧对齐 */
+    top: 50%; /* 使得垂直居中 */
+    transform: translateY(-50%); /* 保持垂直居中 */
+    margin-right: -8px; /* 从容器右边缘保持一定距离 */
+    padding: 2px 5px; /* 数字的内边距 */
+    border-radius: 5px; /* 如果需要的话，可设置边角圆滑 */
+}

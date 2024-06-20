@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <title>智能中心-海洋牧场监测可视化系统</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'src/assets/img/favicon.ico' %}"/>
+    <link href="{% static 'layouts/modern-light-menu/css/light/loader.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'layouts/modern-light-menu/css/dark/loader.css' %}" rel="stylesheet" type="text/css"/>
+    <script src="{% static 'layouts/modern-light-menu/loader.js' %}"></script>
+
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+    <link href="{% static 'src/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'layouts/modern-light-menu/css/light/plugins.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'layouts/modern-light-menu/css/dark/plugins.css' %}" rel="stylesheet" type="text/css"/>
+    <!-- END GLOBAL MANDATORY STYLES -->
+
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+    <link href="{% static 'src/plugins/src/apex/apexcharts.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'src/assets/css/light/dashboard/dash_intelligentcenter.css' %}" rel="stylesheet"
+          type="text/css"/>
+    <link href="{% static 'src/assets/css/dark/dashboard/dash_intelligentcenter.css' %}" rel="stylesheet"
+          type="text/css"/>
+    <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+    <!-- 通过 Bootstrap Icons CDN 引入图标 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+
+    <link href="{% static 'src/assets/css/light/elements/custom-pagination.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'src/assets/css/dark/elements/custom-pagination.css' %}" rel="stylesheet" type="text/css"/>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+</head>
+
+<body class="layout-boxed">
+<!-- BEGIN LOADER -->
+<div id="load_screen">
+    <div class="loader">
+        <div class="loader-content">
+            <div class="spinner-grow align-self-center"></div>
+        </div>
+    </div>
+</div>
+<!--  END LOADER -->
+
+<!--  BEGIN NAVBAR  -->
+<div class="header-container container-xxl">
+    <header class="header navbar navbar-expand-sm expand-header">
+
+        <a href="javascript:void(0);" class="sidebarCollapse">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                 class="feather feather-menu">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </a>
+
+        <!--search界面-->
+        <div class="search-animated toggle-search">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                 class="feather feather-search">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <form class="form-inline search-full form-inline search" role="search">
+                <div class="search-bar">
+                    <input type="text" class="form-control search-form-control  ml-lg-auto" placeholder="搜索...">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         class="feather feather-x search-close">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </div>
+            </form>
+            <span class="badge badge-secondary">Ctrl + /</span>
+        </div>
+
+        <ul class="navbar-item flex-row ms-lg-auto ms-0">
+
+            <!--主题切换-->
+            <li class="nav-item theme-toggle-item">
+                <a href="javascript:void(0);" class="nav-link theme-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         class="feather feather-moon dark-mode">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         class="feather feather-sun light-mode">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </a>
+            </li>
+
+            <li class="nav-item dropdown user-profile-dropdown  order-lg-0 order-1">
+                <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="userProfileDropdown"
+                   data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div class="avatar-container">
+                        <div class="avatar avatar-sm avatar-indicators avatar-online">
+                            <img alt="avatar" src="{% static 'src/assets/img/boy-1.png' %}" class="rounded-circle">
+                        </div>
+                    </div>
+                </a>
+
+                <div class="dropdown-menu position-absolute" aria-labelledby="userProfileDropdown">
+                    <div class="user-profile-section">
+                        <div class="media mx-auto">
+                            <div class="emoji me-2">
+                                &#x1F44B;
+                            </div>
+                            <div class="media-body">
+                                <h5>李大壮</h5>
+                                <p>池塘清扫员</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dropdown-item">
+                        <a href="{% url 'user_profile' %}" class="btn btn-primary default mb-2 me-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round" class="feather feather-user">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            <span>用户信息</span>
+                        </a>
+                    </div>
+                    <div class="dropdown-item">
+                        <a href="#" class="btn btn-primary default mb-2 me-4" id="sign-in-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round" class="feather feather-lock me-2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                            <span>每日签到</span>
+                        </a>
+                    </div>
+                    <div class="dropdown-item">
+                        <a href="{% url 'signin' %}" class="btn btn-primary default mb-2 me-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round" class="feather feather-log-out">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                <polyline points="16 17 21 12 16 7"></polyline>
+                                <line x1="21" y1="12" x2="9" y2="12"></line>
+                            </svg>
+                            <span>登出系统</span>
+                        </a>
+                    </div>
+                </div>
+
+            </li>
+        </ul>
+    </header>
+</div>
+<!--  END NAVBAR  -->
+
+<!--  BEGIN MAIN CONTAINER  -->
+<div class="main-container" id="container">
+
+    <div class="overlay"></div>
+    <div class="search-overlay"></div>
+
+    <!--  BEGIN SIDEBAR  -->
+    <div class="sidebar-wrapper sidebar-theme">
+
+        <nav id="sidebar">
+
+            <div class="navbar-nav theme-brand flex-row  text-center">
+                <div class="nav-logo">
+                    <div class="nav-item theme-logo">
+                        <a href="{% url 'index' %}">
+                            <img src="{% static 'src/assets/img/logo.svg' %}" class="navbar-logo" alt="logo">
+                        </a>
+                    </div>
+                    <div class="nav-item theme-text">
+                        <a href="{% url 'index' %}" class="nav-link">SeaSystem</a>
+                    </div>
+                </div>
+                <div class="nav-item sidebar-toggle">
+                    <div class="btn-toggle sidebarCollapse">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                             class="feather feather-chevrons-left">
+                            <polyline points="11 17 6 12 11 7"></polyline>
+                            <polyline points="18 17 13 12 18 7"></polyline>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!--TODO:将登陆用户的信息传过来，现在还只是样例-->
+            <div class="profile-info">
+                <div class="user-info">
+                    <div class="profile-img">
+                        <img src="{% static 'src/assets/img/boy-1.png' %}" alt="avatar">
+                    </div>
+                    <div class="profile-content">
+                        <h6 class="">李大壮</h6>
+                        <p class="">池塘清扫员</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="shadow-bottom"></div>
+            <ul class="list-unstyled menu-categories" id="accordionExample">
+                <li class="menu active">
+                    <a href="#dashboard" data-bs-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                 class="feather feather-home">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                            </svg>
+                            <span>Dashboard</span>
+                        </div>
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                 class="feather feather-chevron-right">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </div>
+                    </a>
+                    <ul class="collapse submenu list-unstyled show" id="dashboard" data-bs-parent="#accordionExample">
+                        <li>
+                            <a href="{% url 'index' %}"> 主要信息 </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'underwater' %}"> 水下系统 </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'datacenter' %}"> 数据中心 </a>
+                        </li>
+                        <li class="active">
+                            <a href="{% url 'intelligent' %}"> 智能中心 </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'allcharts' %}"> 图表总览 </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="menu menu-heading">
+                    <div class="heading">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                             stroke-linejoin="round"
+                             class="feather feather-minus">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        <span>APPLICATIONS</span></div>
+                </li>
+
+                <li class="menu">
+                    <a href="{% url 'calendar' %}" aria-expanded="false" class="dropdown-toggle">
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                 class="feather feather-calendar">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                            <span>Calendar</span>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="menu">
+                    <a href="{% url 'chat' %}" aria-expanded="false" class="dropdown-toggle">
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                 class="feather feather-message-square">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                            <span>Chat</span>
+                        </div>
+                    </a>
+                </li>
+
+
+                <li class="menu">
+                    <a href="{% url 'todolist' %}" aria-expanded="false" class="dropdown-toggle">
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                 class="feather feather-edit">
+                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                            </svg>
+                            <span>Todo List</span>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="menu menu-heading">
+                    <div class="heading">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                             stroke-linejoin="round"
+                             class="feather feather-minus">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        <span>USER</span></div>
+                </li>
+
+                <li class="menu">
+                    <a href="#users" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                 class="feather feather-users">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                            <span>用户系统</span>
+                        </div>
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none"
+                                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                 class="feather feather-chevron-right">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </div>
+                    </a>
+                    <ul class="collapse submenu list-unstyled" id="users" data-bs-parent="#accordionExample">
+                        <li>
+                            <a href="{% url 'user_profile' %}">用户信息</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'user_settings' %}">账户设置</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+        </nav>
+
+    </div>
+    <!--  END SIDEBAR  -->
+
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+        <div class="layout-px-spacing">
+
+            <div class="middle-content container-xxl p-0">
+
+                <div class="row layout-top-spacing">
+
+                    <!-- 修改的内容（极度粗糙版） -->
+                    <!-- AI决策部分 -->
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing">
+                        <div class="widget widget-card-four">
+                            <div class="widget-content">
+                                <div class="w-header">
+                                    <div class="w-info">
+                                        <h6 class="value">AI决策</h6>
+                                    </div>
+                                </div>
+
+                                <div class="w-content">
+                                    <div class="w-info">
+                                        <p id="temperature">温度：10-20</p>
+                                        <p id="sunset">光照：20-100</p>
+                                        <p id="oxygen">溶解氧：0.2-0.5</p>
+                                        <p id="PH">pH：8-8.7</p>
+                                        <p id="salinity">盐度：0.01-0.03</p>
+                                    </div>
+                                </div>
+
+                                <div class="w-content">
+                                    <div class="w-info">
+                                        <p id="notice" class="note">未来几天可能降雨，请确保温度、风度正常</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 气象数据，后续应该需要从一些地方获取，目前是写死的。 -->
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing">
+                        <div class="widget widget-card-four">
+                            <div class="widget-content">
+                                <div class="w-header">
+                                    <div class="w-info">
+                                        <h6 class="value">气象数据</h6>
+                                    </div>
+                                </div>
+
+                                <div class="weather-data">
+                                    <div class="row">
+                                        <div class="weather-item">
+                                            <div class="weather-content">
+                                                <i class="bi bi-thermometer weather-icon"></i>
+                                                <span id=temperatureNumber class="weather-text">0~7℃</span>
+                                            </div>
+                                        </div>
+                                        <div class="weather-item">
+                                            <div class="weather-content">
+                                                <i class="bi bi-wind weather-icon"></i>
+                                                <span id=wind class="weather-text">东北风5级</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="weather-item">
+                                            <div class="weather-content">
+                                                <i class="bi bi-moisture weather-icon"></i>
+                                                <span id=moisture class="weather-text">96%</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="weather-item">
+                                            <div class="weather-content">
+                                                <i class="bi bi-cloud weather-icon"></i>
+                                                <span id=air_quality class="weather-text">78 良</span>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="alert-content">
+
+                                    <div class="w-info">
+                                        <p id="notice_alert" class="note">海啸警报</p>
+                                        <p id="time" class="time">time</p>
+                                        <p id="notice_from" class="note">国家海洋局发布</p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+<!--监控视频部分-->
+<div class="col-xl-7 col-lg-6 col-md-6 col-sm-6 col-12 layout-spacing">
+    <div class="widget widget-video">
+        <div class="widget-heading">
+            <h6 class="">监控视频</h6>
+        </div>
+        <div class="video-container">
+            <video id="monitorVideo" width="100%" height="100%" controls>
+                <source src="{% static 'src/assets/img/fish1.mp4' %}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="paginating-container pagination-solid">
+                <ul class="pagination">
+                    <li class="prev"><a href="javascript:void(0);" onclick="changeVideo(1)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </a></li>
+                    <li><a href="javascript:void(0);" onclick="changeVideo(1)">1</a></li>
+                    <li><a href="javascript:void(0);" onclick="changeVideo(2)">2</a></li>
+                    <li><a href="javascript:void(0);" onclick="changeVideo(3)">3</a></li>
+                    <li><a href="javascript:void(0);" onclick="changeVideo(4)">4</a></li>
+                    <li class="next"><a href="javascript:void(0);" onclick="changeVideo(4)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function changeVideo(videoNumber) {
+        var video = document.getElementById('monitorVideo');
+        var sources = [
+            "{% static 'src/assets/img/fish1.mp4' %}",
+            "{% static 'src/assets/img/fish2.mp4' %}",
+            "{% static 'src/assets/img/fish3.mp4' %}",
+            "{% static 'src/assets/img/fish4.mp4' %}"
+        ];
+        video.src = sources[videoNumber - 1];
+        video.load();
+        video.play();
+        
+        var data = [
+            {
+                id: "fish-8976",
+                species: "moonfish",
+                length: "10寸",
+                weight: "5kg",
+                disease: "疑似患病（眼）",
+                anomaly: "鱼群异常（集群）"
+            },
+            {
+                id: "fish-8977",
+                species: "Bream",
+                length: "12寸",
+                weight: "4kg",
+                disease: "健康",
+                anomaly: "正常"
+            },
+            {
+                id: "fish-8978",
+                species: "Perch",
+                length: "15寸",
+                weight: "8kg",
+                disease: "疑似患病（鳞片）",
+                anomaly: "鱼群异常（散开）"
+            },
+            {
+                id: "fish-8979",
+                species: "catfish",
+                length: "20寸",
+                weight: "10kg",
+                disease: "健康",
+                anomaly: "正常"
+            }
+        ];
+        
+        document.getElementById('fish-id').innerText = data[videoNumber - 1].id;
+        document.getElementById('fish-species').innerText = data[videoNumber - 1].species;
+        document.getElementById('fish-length').innerText = data[videoNumber - 1].length;
+        document.getElementById('fish-weight').innerText = data[videoNumber - 1].weight;
+        document.getElementById('fish-disease').innerText = data[videoNumber - 1].disease;
+        document.getElementById('fish-anomaly').innerText = data[videoNumber - 1].anomaly;
+    }
+</script>
+
+<!--实时数据-->
+<div class="col-xl-5 col-lg-6 col-md-6 col-sm-6 col-6 layout-spacing">
+    <div class="widget widget-six">
+        <div class="widget-heading">
+            <h6 class="">实时数据</h6>
+        </div>
+        <div class="additional-features">
+            <div class="row">
+                <!-- 第一行的四个功能 -->
+                <div class="col-6 feature-item">
+                    <div class="feature-content-up">
+                        <i class="bi bi-123 feature-icon"></i>
+                        <span class="feature-title">编号</span>
+                    </div>
+                    <div class="feature-content">
+                        <span id="fish-id" class="feature-text">fish-8976</span>
+                    </div>
+                </div>
+
+                <div class="col-6 feature-item">
+                    <div class="feature-content-up">
+                        <i class="bi bi-tag feature-icon"></i>
+                        <span class="feature-title">鱼种</span>
+                    </div>
+                    <div class="feature-content">
+                        <span id="fish-species" class="feature-text">moonfish</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 feature-item">
+                    <div class="feature-content-up">
+                        <i class="bi bi-bounding-box feature-icon"></i>
+                        <span class="feature-title">体长</span>
+                    </div>
+                    <div class="feature-content">
+                        <span id="fish-length" class="feature-text">10寸</span>
+                    </div>
+                </div>
+
+                <div class="col-6 feature-item">
+                    <div class="feature-content-up">
+                        <i class="bi bi-lightbulb-fill feature-icon"></i>
+                        <span class="feature-title">体重</span>
+                    </div>
+                    <div class="feature-content">
+                        <span id="fish-weight" class="feature-text">5kg</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- 第二行的四个功能 -->
+                <div class="col-6 feature-item">
+                    <div class="feature-content-up">
+                        <i class="bi bi-exclamation-circle feature-icon"></i>
+                    </div>
+                    <div class="feature-content">
+                        <span id="fish-disease" class="feature-text">疑似患病（眼）</span>
+                    </div>
+                </div>
+                <div class="col-6 feature-item">
+                    <div class="feature-content-up">
+                        <i class="bi bi-exclamation-diamond feature-icon"></i>
+                    </div>
+                    <div class="feature-content">
+                        <span id="fish-anomaly" class="feature-text">鱼群异常（集群）</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 feature-item">
+                    <div class="feature-content-up">
+                        <i class="bi bi-arrow-return-right feature-icon"></i>
+                    </div>
+                    <div class="feature-content">
+                        <!-- <button class="btn btn-light-primary mb-2 me-4 btn-sm">轨迹追踪</button> -->
+                        <button class="btn btn-light-primary mb-2 me-4 btn-sm">
+                            <i class="bi bi-star"></i>
+                            <span class="btn-text-inner">轨迹追踪</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-6 feature-item">
+                    <div class="feature-content-up">
+                        <i class="bi bi-graph-up feature-icon"></i>
+                    </div>
+                    <div class="feature-content">
+                        <button class="btn btn-light-primary mb-2 me-4 btn-sm">
+                            <i class="bi bi-star"></i>
+                            <span class="btn-text-inner">轨迹分析</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="application/json" id="temp-data">
+    {{ temp_data|safe }}
+</script>
+<script type="application/json" id="ph-data">
+    {{ ph_data|safe }}
+</script>
+
+
+                    <!-- 海洋牧场环境感知得分图表 -->
+                    <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                        <div class="widget widget-chart-two">
+                            <div class="widget-heading">
+                                <h6 class="">海洋牧场环境感知得分</h6>
+                            </div>
+                            <div class="widget-content-text">
+                                <p>0.25以下为危险</p>
+                                <p>0.5以下为隐患</p>
+                                <p>0.75以下为正常</p>
+                                <p>0.75以上为舒适</p>
+                            </div>
+                            <div class="widget-content">
+                                <div id="enviroment" class=""></div>
+                            </div>
+                            <div class="widget-content-alert">
+                                <p id="enviroment_alert_temperature">水温过高</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 网衣/鱼群检测图表 -->
+                    <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                        <div class="widget widget-chart-three">
+                            <div class="widget-heading">
+                                <div class="">
+                                    <h6 class="">水质预测</h6>
+                                </div>
+
+                                <div class="task-action">
+                                    <div class="dropdown ">
+                                        <a class="dropdown-toggle" href="#" role="button" id="uniqueVisitors"
+                                           data-bs-toggle="dropdown"
+                                           aria-haspopup="true" aria-expanded="false">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                 viewBox="0 0 24 24" fill="none"
+                                                 stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                 stroke-linejoin="round"
+                                                 class="feather feather-more-horizontal">
+                                                <circle cx="12" cy="12" r="1"></circle>
+                                                <circle cx="19" cy="12" r="1"></circle>
+                                                <circle cx="5" cy="12" r="1"></circle>
+                                            </svg>
+                                        </a>
+
+                                        <div class="dropdown-menu left" aria-labelledby="uniqueVisitors">
+                                            <a class="dropdown-item" href="javascript:void(0);">View</a>
+                                            <a class="dropdown-item" href="javascript:void(0);">Update</a>
+                                            <a class="dropdown-item" href="javascript:void(0);">Download</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="widget-content">
+                                <div id="uniqueVisits"></div>
+                            </div>
+                            <div class="widget-content-alert">
+                                <p id="enviroment_alert">PH值过低</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+        <!--  BEGIN FOOTER  -->
+        <div class="footer-wrapper">
+            <div class="footer-section f-section-1">
+                <p class="">系统正在开发ing，有小bug，敬请谅解</p>
+            </div>
+
+        </div>
+        <!--  END FOOTER  -->
+    </div>
+    <!--  END CONTENT AREA  -->
+
+</div>
+<!-- END MAIN CONTAINER -->
+
+
+<!--todo done 新增签到功能，按钮变化，弹窗-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+<script src="{% static 'src/assets/js/Hu/signInScript.js' %}"></script>
+
+
+<!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+<script src="{% static 'src/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'src/plugins/src/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+<script src="{% static 'src/plugins/src/mousetrap/mousetrap.min.js' %}"></script>
+<script src="{% static 'src/plugins/src/waves/waves.min.js' %}"></script>
+<script src="{% static 'layouts/modern-light-menu/app.js' %}"></script>
+<!-- END GLOBAL MANDATORY SCRIPTS -->
+
+<!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+<script src="{% static 'src/plugins/src/apex/apexcharts.min.js' %}"></script>
+<script src="{% static 'src/assets/js/dashboard/dash_intelligentcenter.js' %}"></script>
+<!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+
+</body>
+
+</html>

@@ -1,0 +1,6 @@
+#recent-actions-module {
+    margin-top: 20px;  /* 根据实际需要调整数值，使得与上面的内容对齐 */
+    padding: 15px;     /* 或者调整内边距来改变模块的布局 */
+    border: 1px solid #ccc; /* 可选，添加边框让模块更加明显 */
+    background-color: #f9f9f9; /* 可选，改变背景颜色以增加对比 */
+}

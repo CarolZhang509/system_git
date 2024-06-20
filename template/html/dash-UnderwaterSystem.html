@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <title>水下系统-海洋牧场监测可视化系统</title>
+    <link rel="icon" type="image/x-icon" href="{% static 'src/assets/img/favicon.ico' %}"/>
+    <link href="{% static 'layouts/modern-light-menu/css/light/loader.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'layouts/modern-light-menu/css/dark/loader.css' %}" rel="stylesheet" type="text/css"/>
+    <script src="{% static 'layouts/modern-light-menu/loader.js' %}"></script>
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+    <link href="{% static 'src/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'layouts/modern-light-menu/css/light/plugins.css' %}" rel="stylesheet" type="text/css"/>
+    <link href="{% static 'layouts/modern-light-menu/css/dark/plugins.css' %}" rel="stylesheet" type="text/css"/>
+    <!-- END GLOBAL MANDATORY STYLES -->
+
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+    <link href="{% static 'src/plugins/src/apex/apexcharts.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'src/assets/css/light/components/list-group.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'src/assets/css/light/dashboard/dash_underwater.css' %}" rel="stylesheet" type="text/css"/>
+
+    <link href="{% static 'src/assets/css/dark/components/list-group.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'src/assets/css/dark/dashboard/dash_underwater.css' %}" rel="stylesheet" type="text/css"/>
+    <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+
+</head>
+
+<body class=" layout-boxed">
+<!-- BEGIN LOADER -->
+<div id="load_screen">
+    <div class="loader">
+        <div class="loader-content">
+            <div class="spinner-grow align-self-center"></div>
+        </div>
+    </div>
+</div>
+<!--  END LOADER -->
+
+<!--  BEGIN NAVBAR  -->
+<div class="header-container container-xxl">
+    <header class="header navbar navbar-expand-sm expand-header">
+
+        <a href="javascript:void(0);" class="sidebarCollapse">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                 class="feather feather-menu">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </a>
+
+        <div class="search-animated toggle-search">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                 class="feather feather-search">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <form class="form-inline search-full form-inline search" role="search">
+                <div class="search-bar">
+                    <input type="text" class="form-control search-form-control  ml-lg-auto" placeholder="搜索...">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         class="feather feather-x search-close">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </div>
+            </form>
+            <span class="badge badge-secondary">Ctrl + /</span>
+        </div>
+
+        <ul class="navbar-item flex-row ms-lg-auto ms-0">
+
+            <li class="nav-item theme-toggle-item">
+                <a href="javascript:void(0);" class="nav-link theme-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         class="feather feather-moon dark-mode">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         class="feather feather-sun light-mode">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </a>
+            </li>
+
+            <li class="nav-item dropdown user-profile-dropdown  order-lg-0 order-1">
+                <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="userProfileDropdown"
+                   data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div class="avatar-container">
+                        <div class="avatar avatar-sm avatar-indicators avatar-online">
+                            <img alt="avatar" src="{% static 'src/assets/img/boy-1.png' %}" class="rounded-circle">
+                        </div>
+                    </div>
+                </a>
+
+                <div class="dropdown-menu position-absolute" aria-labelledby="userProfileDropdown">
+                    <div class="user-profile-section">
+                        <div class="media mx-auto">
+                            <div class="emoji me-2">
+                                &#x1F44B;
+                            </div>
+                            <div class="media-body">
+                                <h5>李大壮</h5>
+                                <p>池塘清扫员</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dropdown-item">
+                        <a href="{% url 'user_profile' %}" class="btn btn-primary default mb-2 me-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round" class="feather feather-user">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            <span>用户信息</span>
+                        </a>
+                    </div>
+                    <div class="dropdown-item">
+                        <a href="#" class="btn btn-primary default mb-2 me-4" id="sign-in-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round" class="feather feather-lock me-2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                            <span>每日签到</span>
+                        </a>
+                    </div>
+                    <div class="dropdown-item">
+                        <a href="{% url 'signin' %}" class="btn btn-primary default mb-2 me-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round" class="feather feather-log-out">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                <polyline points="16 17 21 12 16 7"></polyline>
+                                <line x1="21" y1="12" x2="9" y2="12"></line>
+                            </svg>
+                            <span>登出系统</span>
+                        </a>
+                    </div>
+                </div>
+
+            </li>
+        </ul>
+    </header>
+</div>
+<!--  END NAVBAR  -->
+
+<!--  BEGIN MAIN CONTAINER  -->
+<div class="main-container" id="container">
+
+    <div class="overlay"></div>
+    <div class="search-overlay"></div>
+
+    <!--  BEGIN SIDEBAR  -->
+    <div class="sidebar-wrapper sidebar-theme">
+
+        <nav id="sidebar">
+
+            <div class="navbar-nav theme-brand flex-row  text-center">
+                <div class="nav-logo">
+                    <div class="nav-item theme-logo">
+                        <a href="{% url 'index' %}">
+                            <img src="{% static 'src/assets/img/logo.svg' %}" class="navbar-logo" alt="logo">
+                        </a>
+                    </div>
+                    <div class="nav-item theme-text">
+                        <a href="{% url 'index' %}" class="nav-link">SeaSystem</a>
+                    </div>
+                </div>
+                <div class="nav-item sidebar-toggle">
+                    <div class="btn-toggle sidebarCollapse">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                             fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                             stroke-linejoin="round" class="feather feather-chevrons-left">
+                            <polyline points="11 17 6 12 11 7"></polyline>
+                            <polyline points="18 17 13 12 18 7"></polyline>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-info">
+                <div class="user-info">
+                    <div class="profile-img">
+                        <img src="{% static 'src/assets/img/boy-1.png' %}" alt="avatar">
+                    </div>
+                    <div class="profile-content">
+                        <h6 class="">李大壮</h6>
+                        <p class="">池塘清扫员</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="shadow-bottom"></div>
+            <ul class="list-unstyled menu-categories" id="accordionExample">
+                <li class="menu active">
+                    <a href="#dashboard" data-bs-toggle="collapse" aria-expanded="true" class="dropdown-toggle">
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round" class="feather feather-home">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                            </svg>
+                            <span>Dashboard</span>
+                        </div>
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round" class="feather feather-chevron-right">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </div>
+                    </a>
+                    <ul class="collapse submenu list-unstyled show" id="dashboard"
+                        data-bs-parent="#accordionExample">
+                        <li>
+                            <a href="{% url 'index' %}"> 主要信息 </a>
+                        </li>
+                        <li class="active">
+                            <a href="{% url 'underwater' %}"> 水下系统 </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'datacenter' %}"> 数据中心 </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'intelligent' %}"> 智能中心 </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'allcharts' %}"> 图表总览 </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="menu menu-heading">
+                    <div class="heading">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round" class="feather feather-minus">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        <span>APPLICATIONS</span></div>
+                </li>
+
+                <li class="menu">
+                    <a href="{% url 'calendar' %}" aria-expanded="false" class="dropdown-toggle">
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round" class="feather feather-calendar">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                                <line x1="16" y1="2" x2="16" y2="6"></line>
+                                <line x1="8" y1="2" x2="8" y2="6"></line>
+                                <line x1="3" y1="10" x2="21" y2="10"></line>
+                            </svg>
+                            <span>Calendar</span>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="menu">
+                    <a href="{% url 'chat' %}" aria-expanded="false" class="dropdown-toggle">
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round" class="feather feather-message-square">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                            <span>Chat</span>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="menu">
+                    <a href="{% url 'todolist' %}" aria-expanded="false" class="dropdown-toggle">
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round" class="feather feather-edit">
+                                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+                                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+                            </svg>
+                            <span>Todo List</span>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="menu menu-heading">
+                    <div class="heading">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round" class="feather feather-minus">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        <span>USER</span></div>
+                </li>
+
+                <li class="menu">
+                    <a href="#users" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round" class="feather feather-users">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                            <span>Users</span>
+                        </div>
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round" class="feather feather-chevron-right">
+                                <polyline points="9 18 15 12 9 6"></polyline>
+                            </svg>
+                        </div>
+                    </a>
+                    <ul class="collapse submenu list-unstyled" id="users" data-bs-parent="#accordionExample">
+                        <li>
+                            <a href="{% url 'user_profile' %}">用户信息</a>
+                        </li>
+                        <li>
+                            <a href="{% url 'user_settings' %}">账户设置</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+        </nav>
+
+    </div>
+    <!--  END SIDEBAR  -->
+
+
+    <!--  BEGIN CONTENT AREA  -->
+    <div id="content" class="main-content">
+        <div class="layout-px-spacing">
+
+            <div class="middle-content container-xxl p-0">
+
+                <div class="row layout-top-spacing">
+
+                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing">
+
+                        <div class="widget widget-wallet-one">
+
+                            <div class="wallet-info text-center mb-3">
+
+                                <p class="wallet-title mb-3">鱼群数量</p>
+
+                                <p class="total-amount mb-3"> 1038</p>
+
+                                <a href="#" class="wallet-text">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                         stroke-linejoin="round" class="feather feather-trending-up me-2">
+                                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                                        <polyline points="17 6 23 6 23 12"></polyline>
+                                    </svg>
+                                    Get 6% improve</a>
+
+                            </div>
+
+
+                            <div class="wallet-action text-center d-flex justify-content-around">
+
+                                <button class="btn btn-danger">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                         stroke-linejoin="round" class="feather feather-minus-circle">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                                    </svg>
+                                    <span class="btn-text-inner">今日死亡：6</span>
+                                </button>
+
+                                <button class="btn btn-success">
+
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                         stroke-linejoin="round" class="feather feather-minus-circle">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <line x1="12" y1="8" x2="12" y2="16"></line>
+                                        <line x1="8" y1="12" x2="16" y2="12"></line>
+                                    </svg>
+
+                                    <span class="btn-text-inner">今日新增：8</span>
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 layout-spacing">
+                        <div class="widget widget-three">
+                            <div class="widget-heading">
+                                <h5 class="">鱼类信息</h5>
+
+                            </div>
+                            <div class="widget-content">
+
+                                <div class="order-summary">
+
+                                    <div class="summary-list">
+                                        <div class="w-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                 class="feather feather-shopping-bag">
+                                                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                                                <line x1="3" y1="6" x2="21" y2="6"></line>
+                                                <path d="M16 10a4 4 0 0 1-8 0"></path>
+                                            </svg>
+                                        </div>
+                                        <div class="w-summary-details">
+
+                                            <div class="w-summary-info">
+                                                <h6>鱼种</h6>
+                                                <p class="summary-count">50+</p>
+                                            </div>
+
+                                            <div class="w-summary-stats">
+                                                <div class="progress">
+                                                    <div class="progress-bar bg-gradient-secondary"
+                                                         role="progressbar" style="width: 90%" aria-valuenow="90"
+                                                         aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="summary-list">
+                                        <div class="w-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                 class="feather feather-tag">
+                                                <path
+                                                        d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z">
+                                                </path>
+                                                <line x1="7" y1="7" x2="7" y2="7"></line>
+                                            </svg>
+                                        </div>
+                                        <div class="w-summary-details">
+
+                                            <div class="w-summary-info">
+                                                <h6>鱼苗</h6>
+                                                <p class="summary-count">500尾</p>
+                                            </div>
+
+                                            <div class="w-summary-stats">
+                                                <div class="progress">
+                                                    <div class="progress-bar bg-gradient-success" role="progressbar"
+                                                         style="width: 65%" aria-valuenow="65" aria-valuemin="0"
+                                                         aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="summary-list">
+                                        <div class="w-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                 class="feather feather-credit-card">
+                                                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                                                <line x1="1" y1="10" x2="23" y2="10"></line>
+                                            </svg>
+                                        </div>
+                                        <div class="w-summary-details">
+
+                                            <div class="w-summary-info">
+                                                <h6>生长</h6>
+                                                <p class="summary-count">600尾</p>
+                                            </div>
+
+                                            <div class="w-summary-stats">
+                                                <div class="progress">
+                                                    <div class="progress-bar bg-gradient-warning" role="progressbar"
+                                                         style="width: 80%" aria-valuenow="80" aria-valuemin="0"
+                                                         aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 col-12 layout-spacing">
+                        <div class="widget widget-three">
+                            <div class="widget-heading">
+                                <h5 class="">设备信息</h5>
+
+
+                            </div>
+                            <div class="widget-content">
+
+                                <div class="order-summary">
+
+                                    <div class="summary-list">
+                                        <div class="w-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                 stroke-linecap="round" stroke-linejoin="round"
+                                                 class="feather feather-shopping-bag">
+                                                <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                                                <line x1="3" y1="6" x2="21" y2="6"></line>
+                                                <path d="M16 10a4 4 0 0 1-8 0"></path>
+                                            </svg>
+                                        </div>
+                                        <div class="w-summary-details">
+
+                                            <div class="w-summary-info">
+                                                <h6>镜头</h6>
+                                                <p class="summary-count">5+</p>
+                                            </div>
+
+                                            <div class="w-summary-stats">
+                                                <div class="progress">
+                                                    <div class="progress-bar bg-gradient-secondary" role="progressbar"
+                                                         style="width: 90%" aria-valuenow="90" aria-valuemin="0"
+                                                         aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="summary-list">
+                                        <div class="w-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                 stroke-linecap="round" stroke-linejoin="round"
+                                                 class="feather feather-tag">
+                                                <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path>
+                                                <line x1="7" y1="7" x2="7" y2="7"></line>
+                                            </svg>
+                                        </div>
+                                        <div class="w-summary-details">
+
+                                            <div class="w-summary-info">
+                                                <h6>云台</h6>
+                                                <p class="summary-count">2</p>
+                                            </div>
+
+                                            <div class="w-summary-stats">
+                                                <div class="progress">
+                                                    <div class="progress-bar bg-gradient-success" role="progressbar"
+                                                         style="width: 65%" aria-valuenow="65" aria-valuemin="0"
+                                                         aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="summary-list">
+                                        <div class="w-icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                                 stroke-linecap="round" stroke-linejoin="round"
+                                                 class="feather feather-credit-card">
+                                                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                                                <line x1="1" y1="10" x2="23" y2="10"></line>
+                                            </svg>
+                                        </div>
+                                        <div class="w-summary-details">
+
+                                            <div class="w-summary-info">
+                                                <h6>声呐</h6>
+                                                <p class="summary-count">1</p>
+                                            </div>
+
+                                            <div class="w-summary-stats">
+                                                <div class="progress">
+                                                    <div class="progress-bar bg-gradient-warning" role="progressbar"
+                                                         style="width: 80%" aria-valuenow="80" aria-valuemin="0"
+                                                         aria-valuemax="100"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-xl-8 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                        <div class="widget widget-chart-one">
+                            <div class="widget-heading">
+                                <h5 class="">鱼群属性分布曲线</h5>
+                                <div class="task-action">
+                                    <div class="dropdown">
+                                        <a class="dropdown-toggle" href="#" role="button" id="renvenue"
+                                           data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                 class="feather feather-more-horizontal">
+                                                <circle cx="12" cy="12" r="1"></circle>
+                                                <circle cx="19" cy="12" r="1"></circle>
+                                                <circle cx="5" cy="12" r="1"></circle>
+                                            </svg>
+                                        </a>
+                                        <div class="dropdown-menu left" aria-labelledby="renvenue"
+                                             style="will-change: transform;">
+                                            <a class="dropdown-item" href="javascript:void(0);">鱼重量</a>
+                                            <a class="dropdown-item" href="javascript:void(0);">鱼尺寸</a>
+                                            <a class="dropdown-item" href="javascript:void(0);">鱼生命</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="widget-content">
+                                <div id="revenueMonthly"></div>
+                            </div>
+                            <button class="btn btn-primary mb-2 me-4" id="fish1">鱼群1</button>
+
+                            <button class="btn btn-info mb-2 me-4" id="fish2">鱼群2</button>
+
+                            <button class="btn btn-success mb-2 me-4" id="fish3">鱼群3</button>
+
+                            <button class="btn btn-warning mb-2 me-4" id="fish4">鱼群4</button>
+
+                            <button class="btn btn-danger mb-2 me-4" id="fish5">鱼群5</button>
+                        </div>
+                    </div>
+
+
+                    <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                        <div class="widget widget-chart-two">
+                            <div class="widget-heading">
+                                <h5 class="">鱼群种类统计</h5>
+                            </div>
+                            <div class="widget-content">
+                                <div id="chart-2" class=""></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                        <div class="widget widget-chart-one">
+                            <div class="widget-heading">
+                                <h5 class="">鱼群个体数量历史曲线</h5>
+                            </div>
+
+                            <div class="widget-content">
+                                <div id="revenueMonthly2"></div>
+                            </div>
+                            <button class="btn btn-primary mb-2 me-4" id="fish11">鱼群1</button>
+
+                            <button class="btn btn-info mb-2 me-4" id="fish22">鱼群2</button>
+
+                            <button class="btn btn-success mb-2 me-4" id="fish33">鱼群3</button>
+
+                            <button class="btn btn-warning mb-2 me-4" id="fish44">鱼群4</button>
+
+                            <button class="btn btn-danger mb-2 me-4" id="fish55">鱼群5</button>
+                        </div>
+                    </div>
+
+
+                    <!--  修改：硬件信息    -->
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing">
+                        <div class="widget widget-card-four">
+                            <div class="w-header">
+                                <div class="w-info">
+                                    <h6>硬件信息</h6>
+                                </div>
+                            </div>
+                            <div class="w-content">
+                                <div class="w-info">
+                                    <p>网箱长度:100m</p>
+                                    <p>网箱宽度:50m</p>
+                                    <p>网箱深度:30m</p>
+                                    <p>网箱经度:128.034</p>
+                                    <p>网箱纬度:56.123</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-4 col-md-4 col-sm-12 col-12 layout-spacing">
+                        <div class="widget widget-card-four">
+                            <div class="w-header">
+                                <div class="w-info">
+                                    <h6>水底传感器</h6>
+                                </div>
+                            </div>
+                            <div class="w-content">
+                                <div class="w-info">
+                                    <p class="mb-1">运行时间:24天13小时43分钟</p>
+                                    <p class="mb-1">下次检修:35天后</p>
+                                    <p class="mb-1">保修过期:2035年02月01日</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <!--  BEGIN FOOTER  -->
+        <div class="footer-wrapper">
+            <div class="footer-section f-section-1">
+                <p class="">系统正在开发ing，有小bug，敬请谅解</p>
+            </div>
+
+        </div>
+        <!--  END FOOTER  -->
+
+        <!--  END CONTENT AREA  -->
+    </div>
+    <!--  END CONTENT AREA  -->
+
+</div>
+<!-- END MAIN CONTAINER -->
+
+<!--todo done 新增签到功能，按钮变化，弹窗-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="{% static 'src/assets/js/Hu/signInScript.js' %}"></script>
+
+<!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+<script src="{% static 'src/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'src/plugins/src/perfect-scrollbar/perfect-scrollbar.min.js' %}"></script>
+<script src="{% static 'src/plugins/src/mousetrap/mousetrap.min.js' %}"></script>
+<script src="{% static 'src/plugins/src/waves/waves.min.js' %}"></script>
+<script src="{% static 'layouts/modern-light-menu/app.js' %}"></script>
+<!-- END GLOBAL MANDATORY SCRIPTS -->
+
+<!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+<script src="{% static 'src/plugins/src/apex/apexcharts.min.js' %}"></script>
+<script src="{% static 'src/assets/js/dashboard/dash_underwater.js' %}"></script>
+<script src="{% static 'src/assets/js/dashboard/dash_datacenter.js' %}"></script>
+<!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+
+</body>
+
+</html>
